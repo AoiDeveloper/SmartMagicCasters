@@ -2,6 +2,8 @@ plugins {
     kotlin("jvm") version "2.1.21-RC2"
     id("com.gradleup.shadow") version "8.3.0"
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("com.diffplug.spotless") version "7.0.3"
+    id("io.gitlab.arturbosch.detekt") version "1.23.8"
 }
 
 group = "com.github.aoideveloper"
@@ -20,6 +22,8 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.5-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+    implementation("net.kyori:adventure-api:4.20.0")
 }
 
 tasks {
@@ -46,5 +50,11 @@ tasks.processResources {
     filteringCharset = "UTF-8"
     filesMatching("plugin.yml") {
         expand(props)
+    }
+}
+
+spotless {
+    kotlin {
+        ktfmt().googleStyle()
     }
 }
