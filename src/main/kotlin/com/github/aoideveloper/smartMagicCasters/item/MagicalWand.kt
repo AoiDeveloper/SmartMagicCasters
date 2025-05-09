@@ -1,5 +1,6 @@
 package com.github.aoideveloper.smartMagicCasters.item
 
+import com.github.aoideveloper.smartMagicCasters.lib.region.RegionSphere
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -12,13 +13,16 @@ class MagicalWand(
     companion object {
         val actions = mutableMapOf<InteractionType, (Player) -> Unit>(
             InteractionType.RIGHT_CLICK to { player ->
-                player.sendMessage("Hi!Bro!")
             }
         )
     }
 
     override fun onActivated(player: Player) {
-        player.sendMessage("Ready for Casting!")
-        println("here")
+    }
+
+    override fun onActive(player: Player) {
+        val affectArea = RegionSphere.fromRadius(player.location, 8.0)
+        val visualizeHandle = affectArea.visualize()
+        visualizeHandle.invoke(arrayOf(player))
     }
 }

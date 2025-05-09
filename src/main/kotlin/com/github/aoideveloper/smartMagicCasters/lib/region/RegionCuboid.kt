@@ -47,11 +47,11 @@ class RegionCuboid private constructor(val min: Location, val max: Location) : R
     }
   }
 
-  override fun visualize(target: Location): (Player) -> Unit {
+  override fun visualize(): (Array<Player>) -> Unit {
     TODO("Not yet implemented")
   }
 
-  override fun filter(target: Location): (Location) -> Collection<LivingEntity> {
+  override fun filter(): Collection<LivingEntity> {
     TODO()
   }
 }
