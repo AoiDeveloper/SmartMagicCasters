@@ -2,6 +2,7 @@ import com.github.aoideveloper.smartMagicCasters.lib.region.Region3D
 import com.github.aoideveloper.smartMagicCasters.lib.util.log.I18n
 import com.github.aoideveloper.smartMagicCasters.lib.util.normalizeCorners
 import org.bukkit.Location
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 
 class RegionCuboid private constructor(val min: Location, val max: Location) : Region3D {
@@ -39,9 +40,18 @@ class RegionCuboid private constructor(val min: Location, val max: Location) : R
     }
   }
 
-  override fun contains(player: Player): Boolean {
-    if (player.world != min.world) return false
-    val loc = player.location
-    return loc.x in min.x..max.x && loc.y in min.y..max.y && loc.z in min.z..max.z
+  override fun contains(location: Location): Boolean {
+    if (location.world != min.world) return false
+    return location.let { loc ->
+      loc.x in min.x..max.x && loc.y in min.y..max.y && loc.z in min.z..max.z
+    }
+  }
+
+  override fun visualize(target: Location): (Player) -> Unit {
+    TODO("Not yet implemented")
+  }
+
+  override fun filter(target: Location): (Location) -> Collection<LivingEntity> {
+    TODO()
   }
 }
