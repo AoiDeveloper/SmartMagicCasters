@@ -13,7 +13,7 @@ abstract class CustomItem(
   val displayName: Component = Component.text(itemName),
   val displayMaterial: Material = Material.BARRIER,
   private val creator: ItemStackCreator = defaultCreator,
-  ) {
+) {
   fun create(): ItemStack {
     return creator(this)
   }
@@ -33,6 +33,7 @@ abstract class CustomItem(
     }
 
     val ItemStack.itemName: String?
-      get() = this.itemMeta?.persistentDataContainer?.get(NamespacedKeys.item, PersistentDataType.STRING)
+      get() =
+        this.itemMeta?.persistentDataContainer?.get(NamespacedKeys.item, PersistentDataType.STRING)
   }
 }
